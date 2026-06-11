@@ -1,0 +1,4 @@
+ALTER TABLE activity_logs ADD COLUMN IF NOT EXISTS user_id UUID;
+ALTER TABLE activity_logs ADD COLUMN IF NOT EXISTS entity_type TEXT;
+ALTER TABLE activity_logs ADD COLUMN IF NOT EXISTS entity_id UUID;
+ALTER TABLE activity_logs ADD COLUMN IF NOT EXISTS details JSONB;
