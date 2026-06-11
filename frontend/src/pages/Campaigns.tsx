@@ -213,46 +213,46 @@ export default function Campaigns() {
           <table className="w-full text-base text-left">
             <thead className="bg-gray-50 dark:bg-gray-800/50 text-gray-500 dark:text-gray-400 text-base font-semibold uppercase tracking-wider border-b border-gray-100 dark:border-gray-800">
               <tr>
-                <th className="px-4 py-3">Campaign Name</th>
-                <th className="px-4 py-3">Status</th>
-                <th className="px-4 py-3">Channel</th>
-                <th className="px-4 py-3">Audience</th>
-                <th className="px-4 py-3">Schedule</th>
-                <th className="px-4 py-3 text-right">Actions</th>
+                <th className="px-6 py-4">Campaign Name</th>
+                <th className="px-6 py-4">Status</th>
+                <th className="px-6 py-4">Channel</th>
+                <th className="px-6 py-4">Audience</th>
+                <th className="px-6 py-4">Schedule</th>
+                <th className="px-6 py-4 text-right">Actions</th>
               </tr>
             </thead>
             <tbody className="divide-y divide-gray-100 dark:divide-gray-800">
               {isLoading ? (
-                <tr><td colSpan={6} className="px-4 py-6 text-center text-gray-500">Loading campaigns...</td></tr>
+                <tr><td colSpan={6} className="px-6 py-8 text-center text-gray-500">Loading campaigns...</td></tr>
               ) : filteredCampaigns.length === 0 ? (
-                <tr><td colSpan={6} className="px-4 py-6 text-center text-gray-500">No campaigns found.</td></tr>
+                <tr><td colSpan={6} className="px-6 py-8 text-center text-gray-500">No campaigns found.</td></tr>
               ) : (
                 filteredCampaigns.map((campaign) => (
                   <tr key={campaign.id} className="hover:bg-gray-50 dark:hover:bg-gray-800/50 transition-colors">
-                    <td className="px-4 py-3.5">
+                    <td className="px-6 py-5">
                       <p className="font-semibold text-lg text-gray-900 dark:text-white group-hover:text-indigo-600 dark:group-hover:text-indigo-400 transition-colors">{campaign.name}</p>
                       <p className="text-sm text-gray-500 truncate max-w-xs">{campaign.message}</p>
                     </td>
-                    <td className="px-4 py-3">
+                    <td className="px-6 py-4">
                       <span className={`inline-flex items-center px-3 py-1.5 rounded-full text-sm font-semibold ${getStatusColor(campaign.status)}`}>
                         {getStatusBadge(campaign.status)}
                       </span>
                     </td>
-                    <td className="px-4 py-3.5">
+                    <td className="px-6 py-5">
                       <span className="inline-flex items-center px-3 py-1.5 rounded-full text-sm font-semibold bg-indigo-50 text-indigo-700 dark:bg-indigo-900/30 dark:text-indigo-400">
                         {campaign.channel}
                       </span>
                     </td>
-                    <td className="px-4 py-3.5">
+                    <td className="px-6 py-5">
                       <span className="font-bold text-xl text-gray-900 dark:text-white">{campaign.audience_size?.toLocaleString() || 0}</span>
                     </td>
-                    <td className="px-4 py-3.5 text-gray-600 dark:text-gray-300">
+                    <td className="px-6 py-5 text-gray-600 dark:text-gray-300">
                       <div className="flex items-center gap-2 text-base font-medium">
                         <Calendar className="w-5 h-5 text-gray-400" />
                         {campaign.scheduled_at ? new Date(campaign.scheduled_at).toLocaleDateString() : 'Immediate'}
                       </div>
                     </td>
-                    <td className="px-4 py-3.5 text-right relative">
+                    <td className="px-6 py-5 text-right relative">
                       <button 
                         onClick={(e) => {
                           e.stopPropagation();
