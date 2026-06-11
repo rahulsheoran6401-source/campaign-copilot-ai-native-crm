@@ -94,20 +94,20 @@ export default function Orders() {
           <table className="w-full text-base text-left">
             <thead className="bg-gray-50 dark:bg-gray-800/50 text-gray-500 dark:text-gray-400 text-base font-semibold uppercase tracking-wider border-b border-gray-100 dark:border-gray-800">
               <tr>
-                <th className="px-6 py-4">Order ID</th>
-                <th className="px-6 py-4">Customer</th>
-                <th className="px-6 py-4">Amount</th>
-                <th className="px-6 py-4">Date</th>
-                <th className="px-6 py-4">Status</th>
-                <th className="px-6 py-4">Channel Hint</th>
+                <th className="px-4 py-3">Order ID</th>
+                <th className="px-4 py-3">Customer</th>
+                <th className="px-4 py-3">Amount</th>
+                <th className="px-4 py-3">Date</th>
+                <th className="px-4 py-3">Status</th>
+                <th className="px-4 py-3">Channel Hint</th>
               </tr>
             </thead>
             <tbody className="divide-y divide-gray-100 dark:divide-gray-800">
               {isLoading ? (
-                <tr><td colSpan={6} className="px-6 py-8 text-center text-gray-500 dark:text-gray-400">Loading orders...</td></tr>
+                <tr><td colSpan={6} className="px-4 py-6 text-center text-gray-500 dark:text-gray-400">Loading orders...</td></tr>
               ) : filteredOrders.length === 0 ? (
                 <tr>
-                  <td colSpan={6} className="px-6 py-8 text-center text-gray-500 dark:text-gray-400">
+                  <td colSpan={6} className="px-4 py-6 text-center text-gray-500 dark:text-gray-400">
                     <div className="flex flex-col items-center gap-2">
                       <ShoppingCart className="w-8 h-8 text-gray-300 dark:text-gray-600" />
                       <p>No orders found.</p>
@@ -117,23 +117,23 @@ export default function Orders() {
               ) : (
                 filteredOrders.map((order: any) => (
                   <tr key={order.id} className="hover:bg-gray-50 dark:hover:bg-gray-800/50 transition-colors">
-                    <td className="px-6 py-5 font-mono text-base font-semibold text-gray-500 dark:text-gray-400">
+                    <td className="px-4 py-3.5 font-mono text-base font-semibold text-gray-500 dark:text-gray-400">
                       #{order.id.split('-')[0].toUpperCase()}
                     </td>
-                    <td className="px-6 py-5">
+                    <td className="px-4 py-3.5">
                       <p className="font-semibold text-lg text-gray-900 dark:text-white">{order.customers?.name || 'Unknown'}</p>
                       <p className="text-sm text-gray-500 dark:text-gray-400">{order.customers?.email}</p>
                     </td>
-                    <td className="px-6 py-5">
+                    <td className="px-4 py-3.5">
                       <span className="font-bold text-xl text-gray-900 dark:text-white">₹{order.amount.toLocaleString()}</span>
                     </td>
-                    <td className="px-6 py-5 text-gray-600 dark:text-gray-300">
+                    <td className="px-4 py-3.5 text-gray-600 dark:text-gray-300">
                       <div className="flex items-center gap-2 text-base font-medium">
                         <Calendar className="w-5 h-5 text-gray-400" />
                         {new Date(order.created_at).toLocaleDateString()}
                       </div>
                     </td>
-                    <td className="px-6 py-5">
+                    <td className="px-4 py-3.5">
                       <span className={`inline-flex items-center px-3 py-1.5 rounded-full text-sm font-semibold ${
                         order.status === 'Completed' ? 'bg-green-100 text-green-800 dark:bg-green-900/30 dark:text-green-400' :
                         order.status === 'Pending' ? 'bg-yellow-100 text-yellow-800 dark:bg-yellow-900/30 dark:text-yellow-400' :
@@ -142,7 +142,7 @@ export default function Orders() {
                         {order.status === 'Completed' ? '🟢 ' : order.status === 'Pending' ? '🟡 ' : '🔴 '}{order.status}
                       </span>
                     </td>
-                    <td className="px-6 py-5 text-right">
+                    <td className="px-4 py-3.5 text-right">
                       <span className="inline-flex items-center px-3 py-1.5 rounded-full text-sm font-semibold bg-indigo-50 text-indigo-700 dark:bg-indigo-900/30 dark:text-indigo-400">
                         {order.customers?.preferred_channel || 'Email'}
                       </span>

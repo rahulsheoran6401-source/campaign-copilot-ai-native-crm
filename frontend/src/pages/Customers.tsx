@@ -124,22 +124,22 @@ export default function Customers() {
           <table className="w-full text-base text-left">
             <thead className="bg-gray-50 dark:bg-gray-800/50 text-gray-500 dark:text-gray-400 text-base font-semibold uppercase tracking-wider border-b border-gray-100 dark:border-gray-800">
               <tr>
-                <th className="px-6 py-4 cursor-pointer hover:bg-gray-100 dark:hover:bg-gray-800" onClick={() => handleSort('name')}>Customer Name</th>
-                <th className="px-6 py-4 cursor-pointer hover:bg-gray-100 dark:hover:bg-gray-800" onClick={() => handleSort('lifetime_value')}>Total Spend</th>
-                <th className="px-6 py-4">Preferred Channel</th>
-                <th className="px-6 py-4 cursor-pointer hover:bg-gray-100 dark:hover:bg-gray-800" onClick={() => handleSort('churn_risk')}>Churn Risk</th>
-                <th className="px-6 py-4 text-right">Actions</th>
+                <th className="px-4 py-3 cursor-pointer hover:bg-gray-100 dark:hover:bg-gray-800" onClick={() => handleSort('name')}>Customer Name</th>
+                <th className="px-4 py-3 cursor-pointer hover:bg-gray-100 dark:hover:bg-gray-800" onClick={() => handleSort('lifetime_value')}>Total Spend</th>
+                <th className="px-4 py-3">Preferred Channel</th>
+                <th className="px-4 py-3 cursor-pointer hover:bg-gray-100 dark:hover:bg-gray-800" onClick={() => handleSort('churn_risk')}>Churn Risk</th>
+                <th className="px-4 py-3 text-right">Actions</th>
               </tr>
             </thead>
             <tbody className="divide-y divide-gray-100 dark:divide-gray-800">
               {isLoading ? (
-                <tr><td colSpan={5} className="px-6 py-8 text-center text-gray-500">Loading customers...</td></tr>
+                <tr><td colSpan={5} className="px-4 py-6 text-center text-gray-500">Loading customers...</td></tr>
               ) : filteredCustomers.length === 0 ? (
-                <tr><td colSpan={5} className="px-6 py-8 text-center text-gray-500">No customers found.</td></tr>
+                <tr><td colSpan={5} className="px-4 py-6 text-center text-gray-500">No customers found.</td></tr>
               ) : (
                 filteredCustomers.map((customer) => (
                   <tr key={customer.id} className="hover:bg-gray-50 dark:hover:bg-gray-800/50 transition-colors group">
-                    <td className="px-6 py-5">
+                    <td className="px-4 py-3.5">
                       <div className="flex items-center gap-4">
                         <div className="w-10 h-10 rounded-full bg-indigo-100 dark:bg-indigo-900/40 flex items-center justify-center text-indigo-600 dark:text-indigo-400 font-bold text-lg">
                           {customer.name?.charAt(0)}
@@ -150,15 +150,15 @@ export default function Customers() {
                         </div>
                       </div>
                     </td>
-                    <td className="px-6 py-5">
+                    <td className="px-4 py-3.5">
                       <span className="font-bold text-xl text-gray-900 dark:text-white">₹{customer.lifetime_value?.toLocaleString() || 0}</span>
                     </td>
-                    <td className="px-6 py-5">
+                    <td className="px-4 py-3.5">
                       <span className="inline-flex items-center px-3 py-1.5 rounded-full text-sm font-semibold bg-gray-100 text-gray-800 dark:bg-gray-800 dark:text-gray-200">
                         {customer.preferred_channel || 'Email'}
                       </span>
                     </td>
-                    <td className="px-6 py-5">
+                    <td className="px-4 py-3.5">
                       <span className={`inline-flex items-center px-3 py-1.5 rounded-full text-sm font-semibold ${
                         customer.churn_risk === 'High' ? 'bg-red-100 text-red-800 dark:bg-red-900/30 dark:text-red-400' :
                         customer.churn_risk === 'Medium' ? 'bg-yellow-100 text-yellow-800 dark:bg-yellow-900/30 dark:text-yellow-400' :
@@ -167,7 +167,7 @@ export default function Customers() {
                         {customer.churn_risk || 'Low'}
                       </span>
                     </td>
-                    <td className="px-6 py-5 text-right">
+                    <td className="px-4 py-3.5 text-right">
                       <div className="flex justify-end gap-2 opacity-0 group-hover:opacity-100 transition-opacity">
                         <Link to={`/customers/${customer.id}`}>
                           <Button variant="ghost" size="icon" className="h-8 w-8 text-gray-500 hover:text-indigo-600">

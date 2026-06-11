@@ -136,8 +136,8 @@ export default function DashboardLayout() {
   }, [searchQuery, user]);
 
   return (
-    <div className="flex h-screen bg-[#F8FAFC] dark:bg-[#0A0A0B]">
-       <aside className="w-72 bg-white dark:bg-gray-900 border-r border-gray-100 dark:border-gray-800 flex flex-col justify-between shrink-0">
+    <div className="flex h-screen bg-[#F8FAFC] dark:bg-[#0A0A0B] overflow-hidden">
+       <aside className="w-64 bg-white dark:bg-gray-900 border-r border-gray-100 dark:border-gray-800 flex flex-col justify-between shrink-0">
         <div>
           <Link to="/dashboard" className="p-6 flex items-center gap-2 border-b border-gray-100 dark:border-gray-800 bg-white dark:bg-gray-900 hover:bg-gray-50 dark:hover:bg-gray-800 transition-colors">
             <div className="bg-white rounded-2xl p-1 shadow-sm shrink-0">
