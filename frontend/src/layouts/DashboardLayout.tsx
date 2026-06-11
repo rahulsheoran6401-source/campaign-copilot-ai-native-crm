@@ -207,6 +207,7 @@ export default function DashboardLayout() {
             )}
           </div>
         </div>
+      </div>
       </aside>
 
       <main className="flex-1 overflow-y-auto overflow-x-hidden flex flex-col relative w-full max-w-[1600px] mx-auto">
