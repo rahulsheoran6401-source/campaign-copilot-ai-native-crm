@@ -92,7 +92,10 @@ export default function Copilot() {
       const history = messages.map(m => ({ role: m.role, content: m.content })).slice(-5);
 
       // 3. Call backend Gemini endpoint
-      const rawUrl = import.meta.env.MODE === 'development' ? 'http://localhost:5000' : (import.meta.env.VITE_BACKEND_URL || '');
+      let rawUrl = import.meta.env.MODE === 'development' ? 'http://localhost:5000' : (import.meta.env.VITE_BACKEND_URL || '');
+      if (rawUrl && !rawUrl.startsWith('http://') && !rawUrl.startsWith('https://')) {
+        rawUrl = 'https://' + rawUrl;
+      }
       const API_URL = rawUrl.replace(/\/$/, '');
       const response = await fetch(`${API_URL}/api/copilot/generate`, {
         method: 'POST',
