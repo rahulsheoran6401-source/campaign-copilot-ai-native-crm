@@ -40,28 +40,28 @@ export default function Login() {
   };
 
   return (
-    <div className="flex min-h-screen bg-gray-50 font-sans selection:bg-indigo-100 selection:text-indigo-900">
+    <div className="flex min-h-screen h-screen overflow-hidden bg-gray-50 font-sans selection:bg-indigo-100 selection:text-indigo-900">
       
       {/* Left section: Login Form */}
-      <div className="w-full lg:w-1/2 flex flex-col justify-center items-center px-8 sm:px-16 md:px-24 bg-[#FAFAFA] relative z-10 py-12">
+      <div className="w-full lg:w-1/2 flex flex-col justify-center items-center px-6 sm:px-12 md:px-16 bg-[#FAFAFA] relative z-10">
         
         {/* Subtle background patterns for left side */}
         <div className="absolute inset-0 bg-[linear-gradient(to_right,#80808012_1px,transparent_1px),linear-gradient(to_bottom,#80808012_1px,transparent_1px)] bg-[size:24px_24px] pointer-events-none"></div>
 
-        <div className="w-full max-w-[500px] flex flex-col items-center relative z-10">
+        <div className="w-full max-w-[450px] flex flex-col items-center relative z-10">
           
-          <div className="flex flex-col items-center text-center space-y-0 mb-8">
-            <img src="/logo.png" alt="Logo" className="w-[400px] h-[400px] object-contain drop-shadow-xl -mb-12" onError={(e) => { e.currentTarget.style.display='none'; }} />
+          <div className="flex flex-col items-center text-center space-y-0 mb-6">
+            <img src="/logo.png" alt="Logo" className="w-[200px] h-[200px] object-contain drop-shadow-xl -mb-4" onError={(e) => { e.currentTarget.style.display='none'; }} />
             <div className="space-y-2">
               <span className="text-5xl font-black text-gray-900 tracking-tight block">Campaign Copilot</span>
               <span className="text-lg text-gray-500 block">AI-native Customer Engagement Platform</span>
             </div>
           </div>
 
-          <div className="w-full bg-white/80 backdrop-blur-xl border border-gray-200 shadow-2xl rounded-3xl p-10 md:p-12 relative">
+          <div className="w-full bg-white/80 backdrop-blur-xl border border-gray-200 shadow-2xl rounded-3xl p-8 relative">
             
-            <div className="text-center mb-10">
-              <h1 className="text-3xl font-bold text-gray-900 mb-3 tracking-tight">Sign in to your workspace</h1>
+            <div className="text-center mb-6">
+              <h1 className="text-2xl font-bold text-gray-900 mb-2 tracking-tight">Sign in to your workspace</h1>
               <p className="text-gray-500 text-base">Welcome back! Continue managing your campaigns.</p>
             </div>
 
@@ -85,7 +85,7 @@ export default function Login() {
                       required
                       value={email}
                       onChange={(e) => setEmail(e.target.value)}
-                      className="block w-full h-14 pl-12 pr-4 border border-gray-200 rounded-xl focus:ring-4 focus:ring-indigo-600/10 focus:border-indigo-600 transition-all outline-none bg-gray-50/50 focus:bg-white text-gray-900 font-medium placeholder:text-gray-400 placeholder:font-normal text-base"
+                      className="block w-full h-12 pl-12 pr-4 border border-gray-200 rounded-xl focus:ring-4 focus:ring-indigo-600/10 focus:border-indigo-600 transition-all outline-none bg-gray-50/50 focus:bg-white text-gray-900 font-medium placeholder:text-gray-400 placeholder:font-normal text-base"
                       placeholder="name@company.com"
                     />
                   </div>
@@ -105,7 +105,7 @@ export default function Login() {
                       required
                       value={password}
                       onChange={(e) => setPassword(e.target.value)}
-                      className="block w-full h-14 pl-12 pr-4 border border-gray-200 rounded-xl focus:ring-4 focus:ring-indigo-600/10 focus:border-indigo-600 transition-all outline-none bg-gray-50/50 focus:bg-white text-gray-900 font-medium placeholder:text-gray-400 placeholder:font-normal text-base"
+                      className="block w-full h-12 pl-12 pr-4 border border-gray-200 rounded-xl focus:ring-4 focus:ring-indigo-600/10 focus:border-indigo-600 transition-all outline-none bg-gray-50/50 focus:bg-white text-gray-900 font-medium placeholder:text-gray-400 placeholder:font-normal text-base"
                       placeholder="••••••••"
                     />
                   </div>
@@ -127,14 +127,14 @@ export default function Login() {
               <Button 
                 type="submit" 
                 disabled={isLoading}
-                className="w-full h-14 mt-4 flex justify-center items-center rounded-xl shadow-[0_8px_30px_rgb(79,70,229,0.2)] text-lg font-semibold text-white bg-gradient-to-r from-violet-600 to-indigo-600 hover:from-violet-700 hover:to-indigo-700 focus:outline-none focus:ring-4 focus:ring-indigo-500/30 transition-all duration-300 gap-2 group hover:shadow-[0_8px_40px_rgb(79,70,229,0.4)] hover:-translate-y-1"
+                className="w-full h-12 mt-4 flex justify-center items-center rounded-xl shadow-[0_8px_30px_rgb(79,70,229,0.2)] text-lg font-semibold text-white bg-gradient-to-r from-violet-600 to-indigo-600 hover:from-violet-700 hover:to-indigo-700 focus:outline-none focus:ring-4 focus:ring-indigo-500/30 transition-all duration-300 gap-2 group hover:shadow-[0_8px_40px_rgb(79,70,229,0.4)] hover:-translate-y-1"
               >
                 {isLoading ? 'Signing in...' : 'Sign In'}
                 {!isLoading && <ArrowRight className="w-5 h-5 group-hover:translate-x-1.5 transition-transform" />}
               </Button>
             </form>
 
-            <div className="mt-8 text-center border-t border-gray-100 pt-6">
+            <div className="mt-6 text-center border-t border-gray-100 pt-4">
               <span className="text-gray-500">Don't have an account? </span>
               <Link to="/signup" className="text-indigo-600 font-semibold hover:text-indigo-700 transition-colors">Sign up for a new account</Link>
             </div>
@@ -143,15 +143,15 @@ export default function Login() {
       </div>
       
       {/* Right section: Hero Branding */}
-      <div className="hidden lg:flex w-1/2 bg-gradient-to-br from-[#0B1026] via-[#131E48] to-[#29165B] flex-col items-center justify-center p-16 relative overflow-hidden">
+      <div className="hidden lg:flex w-1/2 bg-gradient-to-br from-[#0B1026] via-[#131E48] to-[#29165B] flex-col items-center justify-center p-12 relative overflow-hidden">
         
         {/* Dynamic Background Gradients */}
         <div className="absolute top-[-20%] left-[-10%] w-[70%] h-[70%] bg-indigo-500/20 blur-[140px] rounded-full mix-blend-screen pointer-events-none animate-pulse duration-[10s]"></div>
         <div className="absolute bottom-[-20%] right-[-10%] w-[60%] h-[60%] bg-violet-600/20 blur-[140px] rounded-full mix-blend-screen pointer-events-none"></div>
 
         <div className="relative z-10 w-full max-w-xl">
-          <div className="mb-16">
-            <h2 className="text-6xl font-black text-white mb-6 leading-[1.1] tracking-tight">
+          <div className="mb-10">
+            <h2 className="text-5xl font-black text-white mb-4 leading-[1.1] tracking-tight">
               <span className="text-transparent bg-clip-text bg-gradient-to-r from-violet-400 via-indigo-400 to-cyan-400">AI-Powered</span> <br/>
               Customer <br/>
               Engagement
@@ -162,11 +162,11 @@ export default function Login() {
           </div>
           
           {/* Elegant Floating Cards */}
-          <div className="space-y-5">
+          <div className="space-y-4">
             
-            <div className="flex items-center gap-5 bg-white/5 backdrop-blur-xl border border-white/10 p-6 rounded-2xl shadow-2xl transform hover:-translate-y-1 transition-all duration-300 group cursor-default">
-              <div className="w-16 h-16 rounded-2xl bg-white/10 flex items-center justify-center border border-white/10 group-hover:bg-white/20 transition-colors">
-                <span className="text-3xl">🤖</span>
+            <div className="flex items-center gap-4 bg-white/5 backdrop-blur-xl border border-white/10 p-5 rounded-2xl shadow-2xl transform hover:-translate-y-1 transition-all duration-300 group cursor-default">
+              <div className="w-12 h-12 rounded-2xl bg-white/10 flex items-center justify-center border border-white/10 group-hover:bg-white/20 transition-colors">
+                <span className="text-2xl">🤖</span>
               </div>
               <div>
                 <h3 className="text-white font-bold text-lg mb-1">AI Copilot</h3>
@@ -174,9 +174,9 @@ export default function Login() {
               </div>
             </div>
 
-            <div className="flex items-center gap-5 bg-white/5 backdrop-blur-xl border border-white/10 p-6 rounded-2xl shadow-2xl transform hover:-translate-y-1 transition-all duration-300 group cursor-default ml-8">
-              <div className="w-16 h-16 rounded-2xl bg-white/10 flex items-center justify-center border border-white/10 group-hover:bg-white/20 transition-colors">
-                <span className="text-3xl">🎯</span>
+            <div className="flex items-center gap-4 bg-white/5 backdrop-blur-xl border border-white/10 p-5 rounded-2xl shadow-2xl transform hover:-translate-y-1 transition-all duration-300 group cursor-default ml-8">
+              <div className="w-12 h-12 rounded-2xl bg-white/10 flex items-center justify-center border border-white/10 group-hover:bg-white/20 transition-colors">
+                <span className="text-2xl">🎯</span>
               </div>
               <div>
                 <h3 className="text-white font-bold text-lg mb-1">Customer Segmentation</h3>
@@ -194,9 +194,9 @@ export default function Login() {
               </div>
             </div>
 
-            <div className="flex items-center gap-5 bg-white/5 backdrop-blur-xl border border-white/10 p-6 rounded-2xl shadow-2xl transform hover:-translate-y-1 transition-all duration-300 group cursor-default ml-8">
-              <div className="w-16 h-16 rounded-2xl bg-white/10 flex items-center justify-center border border-white/10 group-hover:bg-white/20 transition-colors">
-                <span className="text-3xl">📈</span>
+            <div className="flex items-center gap-4 bg-white/5 backdrop-blur-xl border border-white/10 p-5 rounded-2xl shadow-2xl transform hover:-translate-y-1 transition-all duration-300 group cursor-default ml-16">
+              <div className="w-12 h-12 rounded-2xl bg-white/10 flex items-center justify-center border border-white/10 group-hover:bg-white/20 transition-colors">
+                <span className="text-2xl">📈</span>
               </div>
               <div>
                 <h3 className="text-white font-bold text-lg mb-1">Campaign Analytics</h3>

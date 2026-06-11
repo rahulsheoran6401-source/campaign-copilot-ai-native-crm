@@ -122,7 +122,7 @@ export default function Dashboard() {
         <p className="text-base text-gray-500 dark:text-gray-400">Here's what's happening with your campaigns today.</p>
       </div>
 
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-4">
+      <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-5 gap-4">
         <Card className="dark:bg-gray-900 dark:border-gray-800 shadow-sm hover:shadow-md transition-shadow">
           <CardContent className="p-3">
             <div className="flex items-center justify-between">
