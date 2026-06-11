@@ -42,23 +42,50 @@ export default function Profile() {
       
       const file = event.target.files[0];
       
-      // Convert to Base64
+      // Convert to Base64 & Resize
       const reader = new FileReader();
       reader.onload = async (e) => {
-        const base64String = e.target?.result as string;
-        
-        // Update auth metadata
-        const { error: updateError } = await supabase.auth.updateUser({
-          data: { avatar_url: base64String }
-        });
+        const img = new Image();
+        img.onload = async () => {
+          const canvas = document.createElement('canvas');
+          const MAX_SIZE = 150;
+          let width = img.width;
+          let height = img.height;
+          
+          if (width > height) {
+            if (width > MAX_SIZE) {
+              height *= MAX_SIZE / width;
+              width = MAX_SIZE;
+            }
+          } else {
+            if (height > MAX_SIZE) {
+              width *= MAX_SIZE / height;
+              height = MAX_SIZE;
+            }
+          }
+          
+          canvas.width = width;
+          canvas.height = height;
+          const ctx = canvas.getContext('2d');
+          ctx?.drawImage(img, 0, 0, width, height);
+          
+          // Use high compression jpeg to keep payload very small for JWT
+          const base64String = canvas.toDataURL('image/jpeg', 0.6);
+          
+          // Update auth metadata
+          const { error: updateError } = await supabase.auth.updateUser({
+            data: { avatar_url: base64String }
+          });
 
-        if (updateError) {
-          console.error('Error uploading avatar:', updateError);
-          alert('Error uploading avatar');
-        } else {
-          window.location.reload();
-        }
-        setIsUploading(false);
+          if (updateError) {
+            console.error('Error uploading avatar:', updateError);
+            alert('Error uploading avatar: ' + updateError.message);
+          } else {
+            window.location.reload();
+          }
+          setIsUploading(false);
+        };
+        img.src = e.target?.result as string;
       };
       reader.readAsDataURL(file);
       

@@ -205,7 +205,7 @@ export default function Dashboard() {
             <CardTitle className="dark:text-white">Revenue Over Time</CardTitle>
           </CardHeader>
           <CardContent>
-            <div className="h-[360px] w-full">
+            <div className="h-[300px] w-full">
               <ResponsiveContainer width="100%" height="100%">
                 <BarChart data={chartData} margin={{ top: 5, right: 20, bottom: 5, left: 0 }}>
                   <CartesianGrid strokeDasharray="3 3" vertical={false} stroke="#E5E7EB" opacity={0.5} />
@@ -227,7 +227,7 @@ export default function Dashboard() {
             <CardTitle className="dark:text-white flex items-center gap-2">⚡ Recent Activity</CardTitle>
           </CardHeader>
           <CardContent>
-            <div className="space-y-4 max-h-[360px] overflow-y-auto pr-2">
+            <div className="space-y-4 max-h-[300px] overflow-y-auto pr-2">
               {activities.length === 0 ? (
                 <div className="text-center py-8 text-gray-500 text-sm">
                    <Activity className="w-8 h-8 mx-auto text-gray-300 dark:text-gray-600 mb-2" />

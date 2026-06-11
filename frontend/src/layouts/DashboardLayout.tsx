@@ -309,7 +309,7 @@ export default function DashboardLayout() {
           </div>
         </header>
         
-        <div className="p-8 pb-24">
+        <div className="p-6 pb-6">
           <Outlet />
         </div>
       </main>

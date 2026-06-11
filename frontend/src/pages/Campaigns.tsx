@@ -351,16 +351,15 @@ export default function Campaigns() {
                  </div>
                </div>
                
-               {editingId && (
-                   <div>
-                     <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1 mt-4">Status</label>
-                     <select value={newStatus} onChange={e => setNewStatus(e.target.value)} className="w-full border border-gray-300 dark:border-gray-700 rounded-lg p-2 outline-none focus:ring-2 focus:ring-indigo-500 bg-transparent dark:text-white">
-                       <option value="Draft">Draft</option>
-                       <option value="Running">Running</option>
-                       <option value="Completed">Completed</option>
-                     </select>
-                   </div>
-                 )}
+               <div>
+                    <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1 mt-4">Status</label>
+                    <select value={newStatus} onChange={e => setNewStatus(e.target.value)} className="w-full border border-gray-300 dark:border-gray-700 rounded-lg p-2 outline-none focus:ring-2 focus:ring-indigo-500 bg-transparent dark:text-white">
+                      <option value="Draft">Draft</option>
+                      <option value="Running">Running</option>
+                      <option value="Paused">Paused</option>
+                      <option value="Completed">Completed</option>
+                    </select>
+                  </div>
                  
                  <div className="pt-4 border-t border-gray-100 dark:border-gray-800 mt-4">
                  <h4 className="font-medium text-gray-900 dark:text-white mb-3 flex items-center gap-2"><Calendar className="w-4 h-4"/> Schedule (Optional)</h4>
