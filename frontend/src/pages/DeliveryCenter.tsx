@@ -16,7 +16,7 @@ const channels = [
 export default function DeliveryCenter() {
   const { user } = useAuthStore();
   const [selectedCampaignId, setSelectedCampaignId] = useState<string>('');
-  const [statusFilter, setStatusFilter] = useState<'All' | 'Draft' | 'Running' | 'Completed'>('Draft');
+  const [statusFilter, setStatusFilter] = useState<'All' | 'Draft' | 'Running' | 'Completed'>('Running');
   const [isSimulating, setIsSimulating] = useState(false);
   const [simulationComplete, setSimulationComplete] = useState(false);
   const queryClient = useQueryClient();

@@ -20,7 +20,7 @@ export default function Dashboard() {
         { count: totalOrders, data: totalOrdersData }
       ] = await Promise.all([
         supabase.from('customers').select('*', { count: 'exact', head: true }).eq('user_id', user?.id),
-        supabase.from('campaigns').select('*', { count: 'exact', head: true }).in('status', ['Running', 'Scheduled']).eq('user_id', user?.id),
+        supabase.from('campaigns').select('*', { count: 'exact', head: true }).eq('status', 'Running').eq('user_id', user?.id),
         supabase.from('campaign_events').select('revenue_generated, created_at').eq('user_id', user?.id),
         supabase.from('communication_logs').select('status').eq('user_id', user?.id),
         supabase.from('orders').select('amount', { count: 'exact' }).eq('user_id', user?.id)
@@ -118,17 +118,17 @@ export default function Dashboard() {
   return (
     <div className="space-y-6">
       <div className="flex flex-col gap-1">
-        <h2 className="text-4xl font-bold text-gray-900 dark:text-white tracking-tight">Workspace Overview</h2>
+        <h2 className="text-3xl font-bold text-gray-900 dark:text-white tracking-tight">Workspace Overview</h2>
         <p className="text-base text-gray-500 dark:text-gray-400">Here's what's happening with your campaigns today.</p>
       </div>
 
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-5">
         <Card className="dark:bg-gray-900 dark:border-gray-800 shadow-sm hover:shadow-md transition-shadow">
-          <CardContent className="p-6">
+          <CardContent className="p-4">
             <div className="flex items-center justify-between">
               <div className="flex flex-col">
                 <span className="text-lg font-semibold text-gray-500 dark:text-gray-400 mb-1 flex items-center gap-1.5">👥 Total Customers</span>
-                <span className="text-4xl font-bold text-gray-900 dark:text-white">{metrics?.totalCustomers.toLocaleString() || '...'}</span>
+                <span className="text-3xl font-bold text-gray-900 dark:text-white">{metrics?.totalCustomers.toLocaleString() || '...'}</span>
               </div>
               <div className="w-[52px] h-[52px] flex items-center justify-center shrink-0 bg-blue-50 dark:bg-blue-900/20 rounded-xl text-blue-600 dark:text-blue-400">
                 <Users className="w-6 h-6" />
@@ -139,11 +139,11 @@ export default function Dashboard() {
         </Card>
 
         <Card className="dark:bg-gray-900 dark:border-gray-800 shadow-sm hover:shadow-md transition-shadow">
-          <CardContent className="p-6">
+          <CardContent className="p-4">
             <div className="flex items-center justify-between">
               <div className="flex flex-col">
                 <span className="text-lg font-semibold text-gray-500 dark:text-gray-400 mb-1 flex items-center gap-1.5">📦 Orders</span>
-                <span className="text-4xl font-bold text-gray-900 dark:text-white">{metrics?.totalOrders.toLocaleString() || '...'}</span>
+                <span className="text-3xl font-bold text-gray-900 dark:text-white">{metrics?.totalOrders.toLocaleString() || '...'}</span>
               </div>
               <div className="w-[52px] h-[52px] flex items-center justify-center shrink-0 bg-indigo-50 dark:bg-indigo-900/20 rounded-xl text-indigo-600 dark:text-indigo-400">
                 <ShoppingCart className="w-6 h-6" />
@@ -154,11 +154,11 @@ export default function Dashboard() {
         </Card>
 
         <Card className="dark:bg-gray-900 dark:border-gray-800 shadow-sm hover:shadow-md transition-shadow">
-          <CardContent className="p-6">
+          <CardContent className="p-4">
             <div className="flex items-center justify-between">
               <div className="flex flex-col">
                 <span className="text-lg font-semibold text-gray-500 dark:text-gray-400 mb-1 flex items-center gap-1.5">📢 Active Campaigns</span>
-                <span className="text-4xl font-bold text-gray-900 dark:text-white">{metrics?.activeCampaigns || '...'}</span>
+                <span className="text-3xl font-bold text-gray-900 dark:text-white">{metrics?.activeCampaigns || '...'}</span>
               </div>
               <div className="w-[52px] h-[52px] flex items-center justify-center shrink-0 bg-purple-50 dark:bg-purple-900/20 rounded-xl text-purple-600 dark:text-purple-400">
                 <Megaphone className="w-6 h-6" />
@@ -169,11 +169,11 @@ export default function Dashboard() {
         </Card>
 
         <Card className="dark:bg-gray-900 dark:border-gray-800 shadow-sm hover:shadow-md transition-shadow">
-          <CardContent className="p-6">
+          <CardContent className="p-4">
             <div className="flex items-center justify-between">
               <div className="flex flex-col">
                 <span className="text-lg font-semibold text-gray-500 dark:text-gray-400 mb-1 flex items-center gap-1.5">📈 Conversion Rate</span>
-                <span className="text-4xl font-bold text-gray-900 dark:text-white">{metrics?.conversionRate || '...'}%</span>
+                <span className="text-3xl font-bold text-gray-900 dark:text-white">{metrics?.conversionRate || '...'}%</span>
               </div>
               <div className="w-[52px] h-[52px] flex items-center justify-center shrink-0 bg-emerald-50 dark:bg-emerald-900/20 rounded-xl text-emerald-600 dark:text-emerald-400">
                 <Activity className="w-6 h-6" />
@@ -184,11 +184,11 @@ export default function Dashboard() {
         </Card>
 
         <Card className="dark:bg-gray-900 dark:border-gray-800 shadow-sm hover:shadow-md transition-shadow">
-          <CardContent className="p-6">
+          <CardContent className="p-4">
             <div className="flex items-center justify-between">
               <div className="flex flex-col">
                 <span className="text-lg font-semibold text-gray-500 dark:text-gray-400 mb-1 flex items-center gap-1.5">💰 Revenue</span>
-                <span className="text-4xl font-bold text-gray-900 dark:text-white">₹{metrics?.totalRevenue.toLocaleString() || '0'}</span>
+                <span className="text-3xl font-bold text-gray-900 dark:text-white">₹{metrics?.totalRevenue.toLocaleString() || '0'}</span>
               </div>
               <div className="w-[52px] h-[52px] flex items-center justify-center shrink-0 bg-green-50 dark:bg-green-900/20 rounded-xl text-green-600 dark:text-green-400">
                 <DollarSign className="w-6 h-6" />
@@ -205,7 +205,7 @@ export default function Dashboard() {
             <CardTitle className="dark:text-white">Revenue Over Time</CardTitle>
           </CardHeader>
           <CardContent>
-            <div className="h-[250px] w-full">
+            <div className="h-[360px] w-full">
               <ResponsiveContainer width="100%" height="100%">
                 <BarChart data={chartData} margin={{ top: 5, right: 20, bottom: 5, left: 0 }}>
                   <CartesianGrid strokeDasharray="3 3" vertical={false} stroke="#E5E7EB" opacity={0.5} />
@@ -227,7 +227,7 @@ export default function Dashboard() {
             <CardTitle className="dark:text-white flex items-center gap-2">⚡ Recent Activity</CardTitle>
           </CardHeader>
           <CardContent>
-            <div className="space-y-4 max-h-[250px] overflow-y-auto pr-2">
+            <div className="space-y-4 max-h-[360px] overflow-y-auto pr-2">
               {activities.length === 0 ? (
                 <div className="text-center py-8 text-gray-500 text-sm">
                    <Activity className="w-8 h-8 mx-auto text-gray-300 dark:text-gray-600 mb-2" />

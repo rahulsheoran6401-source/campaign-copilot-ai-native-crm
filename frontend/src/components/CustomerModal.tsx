@@ -23,7 +23,6 @@ type CustomerModalProps = {
 export function CustomerModal({ isOpen, onClose, customer }: CustomerModalProps) {
   const { user } = useAuthStore();
   const queryClient = useQueryClient();
-  const [initialAmount, setInitialAmount] = useState<number>(0);
   const [formData, setFormData] = useState<Customer>({
     name: '',
     email: '',
@@ -43,7 +42,6 @@ export function CustomerModal({ isOpen, onClose, customer }: CustomerModalProps)
         preferred_channel: 'Email',
         churn_risk: 'Low',
       });
-      setInitialAmount(0);
     }
   }, [customer, isOpen]);
 
@@ -56,18 +54,9 @@ export function CustomerModal({ isOpen, onClose, customer }: CustomerModalProps)
         await logActivity('Updated customer', 'Customer', id, { name: rest.name });
         return result;
       } else {
-        const payload = { ...rest, user_id: user?.id, lifetime_value: initialAmount > 0 ? initialAmount : 0 };
+        const payload = { ...rest, user_id: user?.id, lifetime_value: 0 };
         const { data: result, error } = await supabase.from('customers').insert([payload]).select().single();
         if (error) throw error;
-        
-        if (initialAmount > 0) {
-          await supabase.from('orders').insert([{
-            customer_id: result.id,
-            amount: initialAmount,
-            status: 'Delivered',
-            user_id: user?.id
-          }]);
-        }
         
         await logActivity('Added new customer', 'Customer', result.id, { name: rest.name });
         return result;
@@ -146,21 +135,6 @@ export function CustomerModal({ isOpen, onClose, customer }: CustomerModalProps)
             </div>
           </div>
           
-          {!customer && (
-            <div>
-              <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Initial Order Amount (Optional)</label>
-              <input 
-                type="number" 
-                min="0"
-                value={initialAmount || ''} 
-                onChange={e => setInitialAmount(Number(e.target.value))} 
-                placeholder="e.g. 500"
-                className="w-full border border-gray-300 dark:border-gray-700 rounded-lg p-2 outline-none focus:ring-2 focus:ring-indigo-500 bg-transparent dark:text-white" 
-              />
-              <p className="text-xs text-gray-500 mt-1">This will automatically create their first order and set their lifetime value.</p>
-            </div>
-          )}
-
           <div className="flex justify-end gap-3 mt-6">
             <Button type="button" variant="outline" onClick={onClose}>Cancel</Button>
             <Button type="submit" className="bg-indigo-600 text-white" disabled={saveCustomer.isPending}>

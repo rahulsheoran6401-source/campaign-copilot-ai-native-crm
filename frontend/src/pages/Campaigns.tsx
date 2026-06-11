@@ -19,6 +19,7 @@ export default function Campaigns() {
   const [newMessage, setNewMessage] = useState('');
   const [newChannel, setNewChannel] = useState('Email');
   const [newAudience, setNewAudience] = useState(1000);
+  const [newStatus, setNewStatus] = useState('Draft');
   const [scheduleDate, setScheduleDate] = useState('');
   const [scheduleTime, setScheduleTime] = useState('');
 
@@ -62,7 +63,8 @@ export default function Campaigns() {
       await logActivity(`Changed campaign status to ${status}`, 'Campaign', id, { name });
       
       if (status === 'Running') {
-        fetch('http://localhost:5000/api/campaigns/' + id + '/trigger', { method: 'POST' }).catch(console.error);
+        const API_URL = import.meta.env.MODE === 'development' ? 'http://localhost:5000' : import.meta.env.VITE_BACKEND_URL;
+        fetch(`${API_URL}/api/campaigns/${id}/trigger`, { method: 'POST' }).catch(console.error);
       }
     },
     onSuccess: () => queryClient.invalidateQueries({ queryKey: ['campaigns'] })
@@ -109,7 +111,7 @@ export default function Campaigns() {
       message: newMessage,
       channel: newChannel,
       audience_size: newAudience,
-      status: editingId ? undefined : status, // keep status if editing, unless we want to reset
+      status: editingId ? newStatus : status,
       scheduled_at
     });
   };
@@ -120,6 +122,7 @@ export default function Campaigns() {
     setNewMessage(campaign.message);
     setNewChannel(campaign.channel);
     setNewAudience(campaign.audience_size || 1000);
+    setNewStatus(campaign.status || 'Draft');
     
     if (campaign.scheduled_at) {
       const d = new Date(campaign.scheduled_at);
@@ -147,12 +150,20 @@ export default function Campaigns() {
   });
 
   const getStatusColor = (status: string) => {
-    switch(status) {
-      case 'Running': return 'bg-green-100 text-green-700 dark:bg-green-900/20 dark:text-green-400';
-      case 'Completed': return 'bg-blue-100 text-blue-700 dark:bg-blue-900/20 dark:text-blue-400';
-      case 'Paused': return 'bg-yellow-100 text-yellow-700 dark:bg-yellow-900/20 dark:text-yellow-400';
-      case 'Scheduled': return 'bg-purple-100 text-purple-700 dark:bg-purple-900/20 dark:text-purple-400';
-      default: return 'bg-gray-100 text-gray-700 dark:bg-gray-800 dark:text-gray-300'; // Draft
+    switch (status) {
+      case 'Running': return 'bg-green-100 text-green-800 dark:bg-green-900/30 dark:text-green-400';
+      case 'Scheduled': return 'bg-purple-100 text-purple-800 dark:bg-purple-900/30 dark:text-purple-400';
+      case 'Paused': return 'bg-orange-100 text-orange-800 dark:bg-orange-900/30 dark:text-orange-400';
+      case 'Completed': return 'bg-blue-100 text-blue-800 dark:bg-blue-900/30 dark:text-blue-400';
+      default: return 'bg-yellow-100 text-yellow-800 dark:bg-yellow-900/30 dark:text-yellow-400'; // Draft
+    }
+  };
+
+  const getStatusBadge = (status: string) => {
+    switch (status) {
+      case 'Running': return '🟢 Running';
+      case 'Completed': return '🔵 Completed';
+      default: return `🟡 ${status}`; // Draft, Paused, Scheduled
     }
   };
 
@@ -222,9 +233,9 @@ export default function Campaigns() {
                       <p className="font-semibold text-lg text-gray-900 dark:text-white group-hover:text-indigo-600 dark:group-hover:text-indigo-400 transition-colors">{campaign.name}</p>
                       <p className="text-sm text-gray-500 truncate max-w-xs">{campaign.message}</p>
                     </td>
-                    <td className="px-6 py-5">
+                    <td className="px-6 py-4">
                       <span className={`inline-flex items-center px-3 py-1.5 rounded-full text-sm font-semibold ${getStatusColor(campaign.status)}`}>
-                        {campaign.status}
+                        {getStatusBadge(campaign.status)}
                       </span>
                     </td>
                     <td className="px-6 py-5">
@@ -340,7 +351,18 @@ export default function Campaigns() {
                  </div>
                </div>
                
-               <div className="pt-4 border-t border-gray-100 dark:border-gray-800">
+               {editingId && (
+                   <div>
+                     <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1 mt-4">Status</label>
+                     <select value={newStatus} onChange={e => setNewStatus(e.target.value)} className="w-full border border-gray-300 dark:border-gray-700 rounded-lg p-2 outline-none focus:ring-2 focus:ring-indigo-500 bg-transparent dark:text-white">
+                       <option value="Draft">Draft</option>
+                       <option value="Running">Running</option>
+                       <option value="Completed">Completed</option>
+                     </select>
+                   </div>
+                 )}
+                 
+                 <div className="pt-4 border-t border-gray-100 dark:border-gray-800 mt-4">
                  <h4 className="font-medium text-gray-900 dark:text-white mb-3 flex items-center gap-2"><Calendar className="w-4 h-4"/> Schedule (Optional)</h4>
                  <div className="grid grid-cols-2 gap-4">
                    <div>

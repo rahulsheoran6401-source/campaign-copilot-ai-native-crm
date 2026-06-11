@@ -92,7 +92,8 @@ export default function Copilot() {
       const history = messages.map(m => ({ role: m.role, content: m.content })).slice(-5);
 
       // 3. Call backend Gemini endpoint
-      const response = await fetch('http://localhost:5000/api/copilot/generate', {
+      const API_URL = import.meta.env.MODE === 'development' ? 'http://localhost:5000' : import.meta.env.VITE_BACKEND_URL;
+      const response = await fetch(`${API_URL}/api/copilot/generate`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ prompt: userPrompt, history, userId: user?.id })

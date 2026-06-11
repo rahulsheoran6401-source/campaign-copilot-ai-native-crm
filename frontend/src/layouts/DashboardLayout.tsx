@@ -137,8 +137,7 @@ export default function DashboardLayout() {
 
   return (
     <div className="flex h-screen bg-[#F8FAFC] dark:bg-[#0A0A0B]">
-      {/* Sidebar */}
-      <aside className="w-80 bg-white dark:bg-gray-900 border-r border-gray-100 dark:border-gray-800 flex flex-col justify-between">
+       <aside className="w-72 bg-white dark:bg-gray-900 border-r border-gray-100 dark:border-gray-800 flex flex-col justify-between shrink-0">
         <div>
           <Link to="/dashboard" className="p-6 flex items-center gap-2 border-b border-gray-100 dark:border-gray-800 bg-white dark:bg-gray-900 hover:bg-gray-50 dark:hover:bg-gray-800 transition-colors">
             <div className="bg-white rounded-2xl p-1 shadow-sm shrink-0">
@@ -151,13 +150,13 @@ export default function DashboardLayout() {
               const isActive = location.pathname.startsWith(item.path);
               return (
                 <Link
-                  key={item.name}
+                  key={item.path}
                   to={item.path}
                   className={cn(
-                    "flex items-center px-4 py-3 text-base font-medium rounded-xl transition-all duration-200 group",
+                    'flex items-center gap-3 px-4 py-3 rounded-xl transition-all duration-200 group font-medium',
                     isActive 
-                      ? "bg-indigo-50 text-indigo-700 dark:bg-indigo-500/10 dark:text-indigo-400 font-semibold shadow-sm" 
-                      : "text-gray-600 hover:bg-gray-50 hover:text-gray-900 dark:text-gray-400 dark:hover:bg-gray-800/50 dark:hover:text-white"
+                      ? 'bg-indigo-50 dark:bg-indigo-900/30 text-indigo-600 dark:text-indigo-400 shadow-sm' 
+                      : 'text-gray-600 dark:text-gray-400 hover:bg-gray-50 dark:hover:bg-gray-800 hover:text-gray-900 dark:hover:text-white'
                   )}
                 >
                   <span className={cn("text-[22px] mr-3 transition-transform duration-200", isActive ? "scale-110 drop-shadow-md" : "grayscale group-hover:grayscale-0 group-hover:scale-110")}>{item.icon as string}</span>
@@ -167,25 +166,24 @@ export default function DashboardLayout() {
             })}
           </nav>
         </div>
-        <div className="p-4">
-          <Link
-            to="/settings"
-            className={cn(
-              "flex items-center gap-3 px-3 py-2.5 rounded-xl text-sm font-medium transition-colors mb-2",
-              location.pathname === '/settings' ? "bg-indigo-50 dark:bg-indigo-900/20 text-indigo-700 dark:text-indigo-400" : "text-gray-600 dark:text-gray-400 hover:bg-gray-50 dark:hover:bg-gray-800 hover:text-gray-900 dark:hover:text-white"
-            )}
+
+        <div className="p-4 border-t border-gray-100 dark:border-gray-800 space-y-1 relative">
+          <button
+            onClick={() => {}}
+            className="w-full flex items-center gap-3 px-4 py-3 rounded-xl transition-all duration-200 group font-medium text-gray-600 dark:text-gray-400 hover:bg-gray-50 dark:hover:bg-gray-800"
           >
-            <Settings className={cn("w-5 h-5", location.pathname === '/settings' ? "text-indigo-600 dark:text-indigo-400" : "text-gray-400")} />
+            <Settings className="w-5 h-5 transition-transform duration-200 group-hover:rotate-45" />
             Settings
-          </Link>
-          <div className="relative">
+          </button>
+
+          <div className="pt-2 mt-2 border-t border-gray-100 dark:border-gray-800">
             <button 
               onClick={() => setShowProfileMenu(!showProfileMenu)}
-              className="w-full flex items-center gap-3 px-3 py-3 border border-gray-100 dark:border-gray-800 rounded-xl hover:bg-gray-50 dark:hover:bg-gray-800 transition-colors text-left"
+              className="w-full flex items-center gap-3 px-4 py-2 rounded-xl transition-all hover:bg-gray-50 dark:hover:bg-gray-800 text-left"
             >
-              <div className="w-8 h-8 rounded-full bg-indigo-100 dark:bg-indigo-900/40 flex items-center justify-center text-indigo-600 dark:text-indigo-400 font-bold overflow-hidden shrink-0">
+              <div className="w-8 h-8 rounded-full bg-indigo-100 dark:bg-indigo-900 flex items-center justify-center text-indigo-600 dark:text-indigo-400 font-bold shrink-0 overflow-hidden">
                 {user?.user_metadata?.avatar_url ? (
-                  <img src={user.user_metadata.avatar_url} alt="Avatar" className="w-full h-full object-cover" />
+                  <img src={user.user_metadata.avatar_url} alt="User" className="w-full h-full object-cover" />
                 ) : (
                   (user?.user_metadata?.full_name || 'A').charAt(0).toUpperCase()
                 )}
@@ -197,7 +195,7 @@ export default function DashboardLayout() {
             </button>
             
             {showProfileMenu && (
-              <div className="absolute bottom-full left-0 w-full mb-2 bg-white dark:bg-gray-900 rounded-xl shadow-lg border border-gray-100 dark:border-gray-800 py-1 overflow-hidden animate-in fade-in slide-in-from-bottom-2">
+              <div className="absolute bottom-full left-0 w-full mb-2 bg-white dark:bg-gray-900 rounded-xl shadow-lg border border-gray-100 dark:border-gray-800 py-1 overflow-hidden animate-in fade-in slide-in-from-bottom-2 z-50">
                 <Link to="/profile" className="flex items-center gap-2 px-4 py-2 text-sm text-gray-700 dark:text-gray-300 hover:bg-gray-50 dark:hover:bg-gray-800">
                   <User className="w-4 h-4" /> Profile
                 </Link>
@@ -210,7 +208,7 @@ export default function DashboardLayout() {
         </div>
       </aside>
 
-      <main className="flex-1 overflow-auto flex flex-col relative">
+      <main className="flex-1 overflow-y-auto overflow-x-hidden flex flex-col relative w-full max-w-[1600px] mx-auto">
         <header className="h-[76px] bg-white/80 dark:bg-gray-900/80 backdrop-blur-md border-b border-gray-100 dark:border-gray-800 flex items-center justify-between px-8 sticky top-0 z-40">
           <div className="flex items-center gap-4">
             <h1 className="text-4xl font-bold text-gray-900 dark:text-white capitalize tracking-tight flex items-center gap-3">

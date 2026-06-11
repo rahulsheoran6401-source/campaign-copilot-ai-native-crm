@@ -41,35 +41,30 @@ export default function Profile() {
       if (!event.target.files || event.target.files.length === 0) return;
       
       const file = event.target.files[0];
-      const fileExt = file.name.split('.').pop();
-      const filePath = `${user?.id}-${Math.random()}.${fileExt}`;
-
-      // Upload to storage
-      const { error: uploadError } = await supabase.storage
-        .from('avatars')
-        .upload(filePath, file);
-
-      if (uploadError) throw uploadError;
-
-      // Get public URL
-      const { data: { publicUrl } } = supabase.storage
-        .from('avatars')
-        .getPublicUrl(filePath);
-
-      // Update auth metadata
-      const { error: updateError } = await supabase.auth.updateUser({
-        data: { avatar_url: publicUrl }
-      });
-
-      if (updateError) throw updateError;
       
-      // Update local state by forcing a refresh or state update
-      window.location.reload(); // Simple way to refresh user store for this demo
+      // Convert to Base64
+      const reader = new FileReader();
+      reader.onload = async (e) => {
+        const base64String = e.target?.result as string;
+        
+        // Update auth metadata
+        const { error: updateError } = await supabase.auth.updateUser({
+          data: { avatar_url: base64String }
+        });
+
+        if (updateError) {
+          console.error('Error uploading avatar:', updateError);
+          alert('Error uploading avatar');
+        } else {
+          window.location.reload();
+        }
+        setIsUploading(false);
+      };
+      reader.readAsDataURL(file);
       
     } catch (error) {
       console.error('Error uploading avatar:', error);
       alert('Error uploading avatar');
-    } finally {
       setIsUploading(false);
     }
   };
