@@ -20,24 +20,40 @@ An AI-native Mini CRM built for intelligent shopper engagement. The platform hel
 ## Architecture
 
 Frontend (React + Vite)
+
 ↓
+
 Backend (Express)
+
 ↓
+
 Supabase
 
 Campaign
+
 ↓
+
 Channel Service
+
 ↓
+
 Callback Receipt API
+
 ↓
+
 communication_logs + campaign_events
+
 ↓
+
 Analytics Dashboard
 
+
 Gemini AI
+
 ↓
+
 Hybrid CRM Copilot
+
 
 ## Tech Stack
 
