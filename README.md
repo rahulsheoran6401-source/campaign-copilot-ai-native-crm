@@ -21,37 +21,31 @@ An AI-native Mini CRM built for intelligent shopper engagement. The platform hel
 
 Frontend (React + Vite)
 
-↓
+        ↓
+Backend (Express + Railway)
 
-Backend (Express)
+        ↓
+Supabase (Auth + Database)
 
-↓
 
-Supabase
+Campaign Execution
 
-Campaign
-
-↓
-
+        ↓
 Channel Service
 
-↓
-
+        ↓
 Callback Receipt API
 
-↓
-
+        ↓
+        
 communication_logs + campaign_events
-
-↓
-
+        ↓
 Analytics Dashboard
 
 
 Gemini AI
 
-↓
-
+        ↓
 Hybrid CRM Copilot
 
 
@@ -86,9 +80,13 @@ Hybrid CRM Copilot
 ## Folder Structure
 
 campaign-copilot-ai-native-crm
+
 ├── frontend
+
 ├── backend
+
 ├── channel-service
+
 └── schema.sql
 
 ## Key Features
