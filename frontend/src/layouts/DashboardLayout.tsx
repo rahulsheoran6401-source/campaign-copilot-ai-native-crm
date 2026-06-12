@@ -169,13 +169,13 @@ export default function DashboardLayout() {
         </div>
 
         <div className="p-4 border-t border-gray-100 dark:border-gray-800 space-y-1 relative">
-          <button
-            onClick={() => {}}
-            className="w-full flex items-center gap-3 px-4 py-3 rounded-xl transition-all duration-200 group font-medium text-gray-600 dark:text-gray-400 hover:bg-gray-50 dark:hover:bg-gray-800"
-          >
-            <Settings className="w-5 h-5 transition-transform duration-200 group-hover:rotate-45" />
-            Settings
-          </button>
+          <Link
+  to="/settings"
+  className="w-full flex items-center gap-3 px-4 py-3 rounded-xl transition-all duration-200 group font-medium text-gray-600 dark:text-gray-400 hover:bg-gray-50 dark:hover:bg-gray-800"
+>
+  <Settings className="w-5 h-5 transition-transform duration-200 group-hover:rotate-45" />
+  Settings
+</Link>
 
           <div className="pt-2 mt-2 border-t border-gray-100 dark:border-gray-800">
             <button 
