@@ -20,14 +20,10 @@ An AI-native Mini CRM built for intelligent shopper engagement. The platform hel
 ## Architecture
 
 Frontend (React + Vite)
-
         ↓
 Backend (Express + Railway)
-
         ↓
 Supabase (Auth + Database)
-
-
 Campaign Execution
 
         ↓
